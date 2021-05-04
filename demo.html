@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>马里奥吃蘑菇啦</title>
+    <style>
+        body {
+            background-color: rgb(125, 148, 254);
+            /* padding: auto; */
+        }
+
+        canvas {
+            border: 1px solid rgb(125, 148, 254);
+            background: url(./2.png)no-repeat;
+            background-size: 600px;
+            margin: 125px 650px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="mycanvas" width="600" height="1060">这是马里奥吃蘑菇呀呀</canvas>
+    <audio autoplay='autoplay' id="music">
+        <source src="./走路.wav">
+    </audio>
+    <script>
+        var music = document.getElementById('music');
+        var myCanvas = document.getElementById("mycanvas");
+        var context = myCanvas.getContext('2d');
+        var contexts = myCanvas.getContext('2d');
+        var context1 = myCanvas.getContext('2d');
+        var x = 225;
+        var y = 190;
+        var i = 0;
+        var j = 0;
+
+        /* 页面加载时出现小马里奥图片 */
+        window.onload = function () {
+            imgobj = new Image();
+            imgobj.src = "./1.png";
+            imgobj.onload = function () {
+                context.drawImage(imgobj, 0, 0, 48, 54, x, y, 48, 54);
+            }
+
+            imgobj1 = new Image();
+            imgobj1.src = "./4.png";
+            imgobj1.onload = function () {
+                context1.drawImage(imgobj1, 505, 255, 75, 75);
+            }
+        }
+
+        function DrawImage() {
+            return context.drawImage(imgobj, j * 48, i * 54, 48, 54, x, y, 48, 54);
+        }
+        function ClearRect() {
+            context.clearRect(0, 0, 600, 410);
+        }
+        document.addEventListener("keydown", function (e) {
+            if (e.keyCode == 37) {/* 按左键 */
+                music.play();
+                ClearRect();
+                i = 1;
+                x = x - 10;
+                DrawImage();
+                j++;
+                if (j >= 4) {
+                    j = 0;
+                }
+            } else if (e.keyCode == 38) {/* 按上键 */
+                music.play();
+                ClearRect();
+                i = 3;
+                y = y - 10;
+                DrawImage();
+                j++;
+                if (j >= 4) {
+                    j = 0;
+                }
+            } else if (e.keyCode == 39) {/* 按右键 */
+                music.play();
+                ClearRect();
+                i = 2;
+                x = x + 10;
+                DrawImage();
+                j++;
+                if (j >= 4) {
+                    j = 0;
+                }
+            } else if (e.keyCode == 40) {/* 按下键 */
+                music.play();
+                ClearRect();
+                i = 0;
+                y = y + 10;
+                DrawImage();
+                j++;
+                if (j >= 4) {
+                    j = 0;
+                }
+            }
+            if (x == 315 && y == 190) {
+                alert('准备好了吗 马里奥要带你看小哥哥啦');
+                var imgobjs = new Image();
+                imgobjs.src = "./5.jpg";
+                imgobjs.onload = function () {
+                    contexts.drawImage(imgobjs, 0, 375, 600, 650);
+                }
+            } else {
+                contexts.clearRect(0, 375, 600, 650);
+            }
+        })
+
+    </script>
+</body>
+
+</html>
